@@ -33,4 +33,11 @@ describe('UserDataMock',()=>{
         expect(users).toEqual([userMock, userMock2]);
         expect(users).toHaveBeenCalled();
       });
+    
+    test('Deve verificar se o usuário admin está passando', async ()=>{
+        const verify = await userDataMock.verifyUserProfile("ADMIN");
+        expect(verify).toEqual(true);
+        const verify2 = await userDataMock.verifyUserProfile("ADMIN1");
+        expect(verify2).toEqual(false);
+    })
 })

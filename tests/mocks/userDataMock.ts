@@ -14,4 +14,11 @@ export class UserDataMock {
     public async getUsers(): Promise<User[]> {
         return [userMock,userMock2]
     }
+    public async verifyUserProfile(role: string) {
+        if(role === "ADMIN"){
+            return true
+        }else{
+            return false
+        }
+    }
 }

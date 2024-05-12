@@ -31,4 +31,11 @@ export class UserBusiness{
             })
         )
     }
+    public async verifyUserProfile(id: string) {
+        const verify = await this.userData.verifyUserProfile(id);
+        if (!verify) {
+            throw new CustomError(404, "User not found");
+        }
+        return verify
+    }
 }
