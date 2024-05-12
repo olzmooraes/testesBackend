@@ -1,5 +1,5 @@
-import { UserDataMock } from "./mocks/UserDataMock"
-import { userMock } from "./mocks/UserMock";
+import { UserDataMock } from "./mocks/userDataMock";
+import { userMock, userMock2 } from "./mocks/UserMock";
 
 describe('UserDataMock',()=>{
     let userDataMock : UserDataMock;
@@ -19,4 +19,18 @@ describe('UserDataMock',()=>{
         expect(getuser).toEqual(userMock)
         expect(getuser).toHaveBeenCalled();
     })
+    test('Deve retornar erro 401 e mensagem de não autorizado', async () => {
+        try {
+          await userDataMock.getUsers();
+        } catch (e : any) {
+          expect(e).toBeInstanceOf(Error);
+          expect(e.message).toBe('Não autorizado');
+          expect(e.status).toBe(401);
+        }
+      });
+    test('Deve retornar a lista de usuários com status 200', async () => {
+        const users = await userDataMock.getUsers();
+        expect(users).toEqual([userMock, userMock2]);
+        expect(users).toHaveBeenCalled();
+      });
 })

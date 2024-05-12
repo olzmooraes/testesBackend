@@ -1,4 +1,4 @@
-import { CustomError } from "../data/errors/CustomError";
+import { CustomError } from "../errors/CustomError";
 import UserData from "../data/Userdata";
 export class UserBusiness{
     constructor(
@@ -15,5 +15,20 @@ export class UserBusiness{
             email: user.getEmail(),
             role: user.getRole(),
         };
+    }
+
+    public async getUsers() {
+        const users = await this.userData.getUsers();
+        if (!users) {
+        throw new CustomError(404, "Users not found");
+        }
+        return users.map(
+            e => ({
+                id: e.getId(),
+                name: e.getName(),
+                email: e.getEmail(),
+                role: e.getRole(),
+            })
+        )
     }
 }

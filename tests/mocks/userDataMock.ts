@@ -11,4 +11,7 @@ export class UserDataMock {
             undefined
         }
     }
+    public async getUsers(): Promise<User[]> {
+        return [userMock,userMock2]
+    }
 }
